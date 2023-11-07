@@ -123,6 +123,41 @@
                 
                 }
                 
+                //
+                export default function active() {
+                    let aPanel = document.querySelectorAll('.actPanel');
+                    let aBtn = document.querySelectorAll('.actBtn');
+            
+                    aBtn.forEach((btn) => {
+                        btn.addEventListener('click', () => {
+                        let key = btn.getAttribute('data-act');
+                        btn.classList.toggle('active');
+            
+                        aPanel.forEach((el) => {
+                            let lock = el.getAttribute('data-act');
+            
+                            if (key === lock) {
+                            el.classList.toggle('active');
+                            } else {
+                            btn.classList.remove('active');
+                            el.classList.remove('active');
+                            }
+                        });
+                        });
+                    });
+                    document.addEventListener('click', function (e) {
+                        let cPanel = e.target.closest('.actPanel');
+                        let cBtn = e.target.closest('.actBtn');
+                        if (cPanel == null && cBtn == null) {
+                        aBtn.forEach((el) => {
+                            el.classList.remove('active');
+                        });
+                        aPanel.forEach((el) => {
+                            el.classList.remove('active');
+                        });
+                        }
+                    });
+                    }
                  
 
         
